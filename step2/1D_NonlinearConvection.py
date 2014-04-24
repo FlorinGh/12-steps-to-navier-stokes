@@ -6,14 +6,14 @@ import numpy as np
 import pylab as pl
 pl.ion() # all functions will be ploted in the same graph (similar to Matlab hold on)
 
-D = 2.0 # length of the 1D domain
-T = 1.0 # total amount of time for the analysis
+D = 4.0 # length of the 1D domain
+T = 2.0 # total amount of time for the analysis
 
-nx = 31 # number of grid points
+nx = 201 # number of grid points
 dx = D/(nx-1) # distance between any pair of adjacent grid points
 gridx = np.linspace(0,2,nx) # creating the space grid
 
-nt = 50 # number of time iterations
+nt = 400 # number of time iterations
 dt = T/nt # duration of each timestep
 
 u = np.ones(nx) # initializing the matrix for velocities
@@ -41,3 +41,5 @@ for n in range(nt): # loop for time iteration
 # if the size of element, dx is decreased, so should be the timestep
 # the time should be smaller than the time needed for the wave to pass one grid cell
 # for this case, the max velocity is 2, therefore the time step should be less than
+# half of the grid cell size
+# dt<dx/vmax
