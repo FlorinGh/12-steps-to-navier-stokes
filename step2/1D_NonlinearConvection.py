@@ -28,7 +28,7 @@ for n in range(nt): # loop for time iteration
         u[i] = un[i] - un[i]*dt/dx*(un[i]-un[i-1]) # compute the velocity for
         # this step for the entire grid based on the velocities in previuos
         # time step and grid points
-    pl.plot(np.linspace(0,2,nx),u) # the position of this statements
+    pl.plot(gridx,u) # the position of this statements
     # makes the plot to get the curves for each time step
     
 # Discussion:
