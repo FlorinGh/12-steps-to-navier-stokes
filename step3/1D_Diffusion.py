@@ -1,8 +1,10 @@
 # Step3: Diffusion only
-# in this step only the diffusion term from the NS eq is used to determine the velocity
-# the diffusion term is a second order derivative multiplied by the diffusive coefficient
+# in this step only the diffusion term from the Navier-Stokes equations
+# is used to determine the velocity;
+# the diffusion term is a second order derivative multiplied by
+# the diffusive coefficient, which in this case is the viscosity;
 # to develop the liniar algebraic aproximation of the second order derivative,
-# the Taylor expansion is used
+# the Taylor expansion is used;
 
 import numpy as np
 import pylab as pl
@@ -33,3 +35,10 @@ for n in range(nt): # loop for time iteration
         # compute the velocities; basically the diffusion coefficient is 0.2
     pl.plot(grid, u) # plots all profiles on the same graph
 
+# Discussion:
+# the time step is calculated using a relaxation factor called Courant number;
+# after running the program it can be seen that the wave does not move along
+# the x axis;
+# but the profile changes in a way that the velocities between 0.5 and 1 are
+# decreasing and the velocities in the vecinity are increasing
+# given more time for diffusion, the velocities are reducing even more
