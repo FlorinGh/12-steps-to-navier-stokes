@@ -15,7 +15,7 @@ nx = 41 # number of gridpoints
 dx = D/(nx-1) # distance between any pair of adjacents grid points
 grid = np.linspace(0,D,nx) # creating the space grid
 
-nt = 50 # the number of timesteps we want to calculate (iterations)
+nt = 60 # the number of timesteps we want to calculate (iterations)
 nu = 0.3 # the value of viscosity
 sigma = 0.2 # parameter sigma, related to Courant number
 dt = sigma*dx**2/nu # the duration of each timestep
