@@ -23,18 +23,19 @@ u = -2*nu*(phiprime/phi)+4
 # Transform the symbolic equation into a function using lambdify
 from sympy.utilities.lambdify import lambdify
 ufunc = lambdify ((t, x, nu), u)
+# Check if the function works with dummy variables
 #print ufunc(1,4,3)
 
 # Variables declaration
-nx = 101
-nt = 100
-dx = 2*np.pi/(nx-1)
-nu = 0.07
-dt = dx*nu
-T = nt*dt
+nx = 101 # number of nodes in the domain
+nt = 100 # number of time steps
+dx = 2*np.pi/(nx-1) # dimension of one element/cell
+nu = 0.07 # viscosity
+dt = dx*nu # the timestep is defined based on the cell dimension
+T = nt*dt # total time of the simulation
 
-grid = np.linspace(0, 2*np.pi, nx)
-un = np.empty(nx)
+grid = np.linspace(0, 2*np.pi, nx) # generating the all grid points
+un = np.empty(nx) # just for array creation
 t = 0
 
 # Initializing the velocity function
@@ -48,16 +49,19 @@ pl.xlim([0,2*np.pi])
 pl.ylim([0,10])
 
 # Apply the scheme with the periodic boundary conditions in mind
-for n in range(nt):
+for n in range(nt): # loop in time
     un = u.copy()
-    for i in range(nx-1):
+    for i in range(nx-1): # loop in space
         u[i] = un[i] - un[i] * dt/dx * (un[i]-un[i-1]) + \
             nu * dt/(dx**2) * (un[i+1] - 2*un[i] + un[i-1])
+    # infer the periodicity
     u[-1] = un[-1] - un[-1] * dt/dx * (un[-1]-un[-2]) + \
             nu * dt/(dx**2) * (un[0] - 2*un[-1] + un[-2])
 
+# The analytical solution
 u_analytical = np.asarray([ufunc(T, xi, nu) for xi in grid])
 
+# Make a plot in which both solutions are plotted
 pl.figure(figsize=(11,7), dpi=100)
 pl.plot(grid, u, marker='o', lw=2, label='Computational')
 pl.plot(grid, u_analytical, label='Analytical')
