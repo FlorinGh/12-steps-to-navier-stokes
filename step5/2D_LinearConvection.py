@@ -11,15 +11,14 @@
 # Initial Conditions: velocity is 2 for x, y in [0.5, 1] and 1 elsewhere
 # Boundary Conditions: velocity is 1 at the edges of the domain (x, y = 0, 2)
 
-from mpl_toolkits.mplot3d import Axes3D # New Library requires for 3D plots
 import numpy as np
 import pylab as pl
 pl.ion()
 
 # Variable declaration
-nx = 81
-ny = 81
-nt = 100
+nx = 501 # initial value 81
+ny = 501 # initial value 81
+nt = 900 # number of time steps; initial value 100
 c = 1
 
 dx = 2.0 / (nx-1)
