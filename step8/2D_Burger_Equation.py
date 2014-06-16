@@ -19,7 +19,7 @@ c = 1
 dx = 2.0/(nx-1)
 dy = 2.0/(ny-1)
 sigma = 0.0009
-nu = 0.01
+nu = 0.005
 dt = sigma*dx*dy/nu
 
 x = np.linspace(0,2,nx)
