@@ -48,7 +48,9 @@ def diffuse(nt):
     
     for n in range(nt+1):
         un = u.copy()
-        u[1:-1,1:-1] = un[1:-1,1:-1] + nu*dt/dx**2*(un[2:,1:-1]-2*un[1:-1,1:-1]+un[0:-2,1:-1]) + nu*dt/dy**2*(un[1:-1,2:]-2*un[1:-1,1:-1]+un[1:-1,0:-2])
+        u[1:-1,1:-1] = un[1:-1,1:-1] + \
+        nu*dt/dx**2*(un[2:,1:-1]-2*un[1:-1,1:-1]+un[0:-2,1:-1]) + \
+        nu*dt/dy**2*(un[1:-1,2:]-2*un[1:-1,1:-1]+un[1:-1,0:-2])
         
         u[0,:] = 1
         u[-1,:] = 1
@@ -57,7 +59,8 @@ def diffuse(nt):
     
     fig = pl.figure(figsize = (11,7), dpi = 100)
     ax = Axes3D(fig)
-    surf2 = ax.plot_surface(X,Y,u[:], rstride=1, cstride=1, cmap=cm.coolwarm, linewidth=0, antialiased=True)
+    surf2 = ax.plot_surface(X,Y,u[:], rstride=1, cstride=1, cmap=cm.coolwarm, \
+    linewidth=0, antialiased=True)
     ax.set_zlim(1,2.5)
     pl.show()
     
