@@ -7,13 +7,14 @@
 
 # First we use the equations given in the IPython notebook
 import numpy as np
+from mpl_toolkits.mplot3d import Axes3D
 import pylab as pl
 pl.ion()
 
 # Variable declaration
-nx = 101
-ny = 101
-nt = 80
+nx = 501
+ny = 501
+nt = 400
 c = 1
 
 dx = 2.0/(nx-1)
@@ -53,11 +54,13 @@ for n in range(nt+1):
     v[:,0] = 1
     v[:,-1] = 1
 
-from pylab import cm
-fig = pl.figure(figsize=(11,7), dpi=200)
-ax = fig.gca(projection = '3d')
+from pylab import cm # this will be used to create a colormap 3d plot
+fig = pl.figure(figsize=(11,7), dpi=100)
+ax = Axes3D(fig)
 X,Y = np.meshgrid(x,y)
-ax.plot_surface(X,Y,v,cmap=cm.coolwarm)
+ax.plot_surface(X,Y,v,cmap=cm.coolwarm) # plot the u component of the velocity
+# to plot the v component just change u with v
+# because the equations are symetrical, the plots are identical
 
 
 

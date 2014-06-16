@@ -12,13 +12,14 @@
 # Boundary Conditions: velocity is 1 at the edges of the domain (x, y = 0, 2)
 
 import numpy as np
+from mpl_toolkits.mplot3d import Axes3D
 import pylab as pl
 pl.ion()
 
 # Variable declaration
 nx = 501 # initial value 81
 ny = 501 # initial value 81
-nt = 900 # number of time steps; initial value 100
+nt = 700 # number of time steps; initial value 100
 c = 1
 
 dx = 2.0 / (nx-1)
@@ -36,8 +37,8 @@ un = np.ones((ny,nx))
 u[.5/dy:1/dy+1, .5/dx:1/dx+1] = 2 # This is a 2D hat function
 
 # Plot initial condition
-fig = pl.figure(figsize = (11,7), dpi = 200)
-ax = fig.gca(projection = '3d')
+fig = pl.figure(figsize = (11,7), dpi = 100)
+ax = Axes3D(fig)
 X, Y = np.meshgrid(x,y)
 surf1 = ax.plot_surface(X,Y,u[:])
 
@@ -54,7 +55,7 @@ for n in range(nt+1): # loop across number of time steps
             u[:,0] = 1
             u[:,-1] = 1
 """
-# Second using array aperations
+# Second using array operations
 for n in range(nt+1):
     un[:] = u[:]
     u[1:,1:] = un[1:,1:]-c*dt/dx*(un[1:,1:]-un[0:-1,1:])-c*dt/dy*(un[1:,1:]-un[1:,0:-1])
@@ -63,6 +64,6 @@ for n in range(nt+1):
     u[:,0] = 1
     u[:,-1] = 1
 
-fig = pl.figure(figsize=(11,7), dpi=200)
-ax = fig.gca(projection = '3d')
+fig = pl.figure(figsize=(11,7), dpi=100)
+ax = Axes3D(fig)
 surf2 = ax.plot_surface(X, Y, u[:])
