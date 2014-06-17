@@ -34,8 +34,8 @@ y = np.linspace(ymin,ymax,ny)
 # Defining the source
 b[nx/4,ny/4] = -100
 b[3*nx/4,3*ny/4] = -100
-b[nx/4,3*ny/4] = -80
-b[3*nx/4,ny/4] = -99
+#b[nx/4,3*ny/4] = -80
+#b[3*nx/4,ny/4] = -99
 
 
 # The scheme is copied from step 9:
