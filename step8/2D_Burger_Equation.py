@@ -30,7 +30,6 @@ u = np.ones((ny,nx))
 v = np.ones((ny,nx))
 un = np.ones((ny,nx))
 vn = np.ones((ny,nx))
-comb = np.ones((ny,nx))
 
 # Assign initial conditions
 u[0.5/dy:1/dy+1, 0.5/dx:1/dx+1] = 2
