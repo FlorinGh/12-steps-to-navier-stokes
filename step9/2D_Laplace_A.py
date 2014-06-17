@@ -11,9 +11,9 @@ from pylab import cm
 pl.ion()
 
 # Variable declaration
-nx = 101  # number of x nodes
-ny = 101  # number of y nodes
-nt = 10000 # maximum number of iterations
+nx = 51  # number of x nodes
+ny = 51  # number of y nodes
+nt = 1000 # maximum number of iterations
 
 dx = 2.0/(nx-1)
 dy = 1.0/(ny-1)
@@ -40,11 +40,17 @@ linewidth=0, antialiased=True)
 ax.view_init(30,225)
 
 # Applying the scheme to determine the pressure distributions
-l1norm_target = 0.00001
+l1norm_target = 0.01
 for n in range(nt+1):
     pn = p.copy()
     p[1:-1,1:-1] = (dx**2*(pn[1:-1,0:-2] + pn[1:-1,2:]) + \
     dy**2*(pn[0:-2,1:-1] + pn[2:,1:-1]))/(2*dx**2+2*dy**2)
+    
+    p[0,0] = (dx**2*(pn[0,-1] + pn[0,1]) + \
+        dy**2*(pn[-1,0] + pn[1,0]))/(2*dx**2+2*dy**2)
+        
+    p[-1,-1] = (dx**2*(pn[-1,-2] + pn[-1,0]) + \
+        dy**2*(pn[-2,-1] + pn[0,-1]))/(2*dx**2+2*dy**2)
     
     p[:,0] = 0
     p[:,-1] = y
