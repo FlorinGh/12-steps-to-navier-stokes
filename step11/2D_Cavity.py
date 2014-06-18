@@ -10,32 +10,47 @@
 import numpy as np
 import pylab as pl
 from pylab import cm
-from mpl_toolkits.mplot3d import Axes3D
 pl.ion()
 
 # Variable declaration
-nx = 51
-ny = 51
-nit = 50
-#c = 1
+xmin = 0.0
+xmax = 2.0
+ymin = 0.0
+ymax = 2.0
+nt = 400
+c = 1
 
-dx = 2.0/(nx-1)
-dy = 2.0/(ny-1)
-dt = 0.001
 
-x = np.linspace(0,2,nx)
-y = np.linspace(0,2,ny)
-Y, X = np.meshgrid(y,x)
+# Defining the call function for the problem
+def cavityFlow(xmin, xmax, ymin, ymax, nt, c):
+    # Number of nodes
+    nx = 51
+    ny = 51
+    
+    # Cell size
+    dx = (xmax-xmin)/(nx-1)
+    dy = (ymax-ymin)/(ny-1)
+    
+    # Step size
+    dt = dx/100
+    
+    # The grid
+    x = np.linspace(xmin,xmax,nx)
+    y = np.linspace(ymin,ymax,ny)
+    Y, X = np.meshgrid(y,x)
+    
+    # Fluid properties
+    rho = 1
+    nu = 0.1
+    
+    # Matrix initialization
+    u = np.zeros((nx, ny))
+    v = np.zeros((nx, ny))
+    p = np.zeros((nx, ny))
+    
+    u, v, p = cavitySolver(nt, u, v, dt, dx, dy, p, rho, nu)
+    ContourPlot2D(u, v, p, Y, X)
 
-# Fluid properties
-rho = 1
-nu = 0.1
-
-# Matrix initialization
-u = np.zeros((ny, nx))
-v = np.zeros((ny, nx))
-p = np.zeros((ny, nx))
-b = np.zeros((ny, nx))
 
 # Defining a function for the pressure build-up
 def buildUpB(b, rho, dt, u, v, dx, dy):
@@ -47,10 +62,12 @@ def buildUpB(b, rho, dt, u, v, dx, dy):
     
     return b
 
+
 # Defining the pressure-Poisson solution:
 def pressPoisson(p, dx, dy, b):
     pn = np.empty_like(p)
     pn = p.copy()
+    nit = 50
     
     for r in range(nit):
         pn = p.copy()
@@ -58,18 +75,19 @@ def pressPoisson(p, dx, dy, b):
         (pn[1:-1,2:]+pn[1:-1,0:-2])*dx**2)/(dx**2+dy**2) - \
         0.5*(dx*dy)**2/(dx**2+dy**2)*b[1:-1,1:-1]
         
-        p[-1,:] = p[-2,:]       # dp/dy = 0 at y = 2
-        p[0,:] = p[1,:]         # dp/dy = 0 at y = 0
-        p[:,0] = p[:,1]         # dp/dx = 0 at x = 0
-        p[:,1] = 0              # p = 0 at x = 2
+        p[-1,:] = p[-2,:]        # dp/dx = 0 at x = 2
+        p[0,:] = p[1,:]          # dp/dx = 0 at x = 0
+        p[:,0] = p[:,1]          # dp/dy = 0 at y = 0
+        p[:,-1] = 0              # p = 0 at y = 2
     
     return p
     
+    
 # Defining the solver function:
-def cavityFlow(nt, u, v, dt, dx, dy, p, rho, nu):
+def cavitySolver(nt, u, v, dt, dx, dy, p, rho, nu):
     un = np.empty_like(u)
     vn = np.empty_like(v)
-    b = np.zeros((ny, nx))
+    b = np.empty_like(p)
     
     for s in range(nt):
         un = u.copy()
@@ -94,7 +112,7 @@ def cavityFlow(nt, u, v, dt, dx, dy, p, rho, nu):
         
         u[0,:] = 0
         u[:,0] = 0
-        u[:,-1] = 1
+        u[:,-1] = c
         v[0,:] = 0
         v[:,0] = 0
         v[:,-1] = 0
@@ -102,15 +120,16 @@ def cavityFlow(nt, u, v, dt, dx, dy, p, rho, nu):
         
     return u, v, p
 
-def ContourPlot2D(u, v, p):
-    fig = pl.figure(figsize = (11,7), dpi = 100)
-    pl.contourf(X,Y,p,alpha=0.5)    # plotting the pressure field contours
+
+# Defining the plotting function
+def ContourPlot2D(u, v, p, Y, X):
+    pl.figure(figsize = (11,7), dpi = 100)
+    pl.contourf(X,Y,p,alpha=0.5,cmap=cm.gist_heat)# plotting the pressure field contours
     pl.colorbar()
     pl.quiver(X[::2,::2],Y[::2,::2],u[::2,::2],v[::2,::2]) # plotting velocity vectors
     pl.xlabel('X')
     pl.ylabel('Y')
     pl.title('Pressure contours and velocity vectors')
 
-nt = 200
-u, v, p = cavityFlow(nt, u, v, dt, dx, dy, p, rho, nu)
-ContourPlot2D(u, v, p)
+# Run the function
+cavityFlow(xmin, xmax, ymin, ymax, nt, c)
