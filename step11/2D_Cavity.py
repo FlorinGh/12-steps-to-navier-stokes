@@ -109,7 +109,8 @@ def ContourPlot2D(u, v, p):
     pl.quiver(X[::2,::2],Y[::2,::2],u[::2,::2],v[::2,::2]) # plotting velocity vectors
     pl.xlabel('X')
     pl.ylabel('Y')
+    pl.title('Pressure contours and velocity vectors')
 
-nt = 2500
+nt = 200
 u, v, p = cavityFlow(nt, u, v, dt, dx, dy, p, rho, nu)
 ContourPlot2D(u, v, p)
