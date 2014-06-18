@@ -14,9 +14,8 @@ from mpl_toolkits.mplot3d import Axes3D
 pl.ion()
 
 # Variable declaration
-nx = 99
-ny = 99
-nt = 199
+nx = 51
+ny = 51
 nit = 50
 #c = 1
 
@@ -103,16 +102,14 @@ def cavityFlow(nt, u, v, dt, dx, dy, p, rho, nu):
         
     return u, v, p
 
+def ContourPlot2D(u, v, p):
+    fig = pl.figure(figsize = (11,7), dpi = 100)
+    pl.contourf(X,Y,p,alpha=0.5)    # plotting the pressure field contours
+    pl.colorbar()
+    pl.quiver(X[::2,::2],Y[::2,::2],u[::2,::2],v[::2,::2]) # plotting velocity vectors
+    pl.xlabel('X')
+    pl.ylabel('Y')
+
+nt = 2500
 u, v, p = cavityFlow(nt, u, v, dt, dx, dy, p, rho, nu)
-
-#def ContourPlot2D(x, y, p):
-fig = pl.figure(figsize = (11,7), dpi = 100)
-pl.contourf(X,Y,p,alpha=0.5)
-pl.colorbar()
-#pl.contour(X,Y,p)
-#pl.quiver(X[::2,::2],Y[::2,::2],u[::2,::2],v[::2,::2])
-pl.xlabel('X')
-pl.ylabel('Y')
-    
-
-
+ContourPlot2D(u, v, p)
