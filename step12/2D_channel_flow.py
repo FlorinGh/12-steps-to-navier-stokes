@@ -166,20 +166,23 @@ def channelSolver(nt, u, v, dt, dx, dy, p, rho, nu, F):
 def VectorPlot2D(u, v, Y, X):
     pl.figure(figsize = (11,7), dpi = 100)
     pl.quiver(X[::3,::3],Y[::3,::3],u[::3,::3],v[::3,::3]) # plotting velocity vectors
+    pl.xlabel('X')
+    pl.ylabel('Y')    
+    pl.title('Channel Flow - Velocity profiles')
     #pl.quiver(X,Y,u,v)
 
 # Defining the call function for the problem
-def channelFlow(xmin, xmax, ymin, ymax, nt, c):
+def channelFlow(xmin, xmax, ymin, ymax, nt):
     # Number of nodes
-    nx = 51
-    ny = 51
+    nx = 41
+    ny = 41
     
     # Cell size
     dx = (xmax-xmin)/(nx-1)
     dy = (ymax-ymin)/(ny-1)
     
     # Step size
-    dt = dx/100
+    dt = dx/5.0
     
     # The grid
     x = np.linspace(xmin,xmax,nx)
@@ -205,15 +208,8 @@ xmin = 0.0
 xmax = 2.0
 ymin = 0.0
 ymax = 2.0
-nt = 5
-c = 2
+nt = 10
 
 # Run the function
-channelFlow(xmin, xmax, ymin, ymax, nt, c)
-
-
-
-
-
-
+channelFlow(xmin, xmax, ymin, ymax, nt)
 
