@@ -71,14 +71,14 @@ def pressPoisson(p, dx, dy, b):
         0.5*(dx*dy)**2/(dx**2+dy**2)*b[-1,1:-1]
         
         # Introducing the wall boundary conditions dp/dy = 0 at y =0,2            
-        p[:,0] = p[:,1]       # dp/dy = 0 at y = 0
-        p[:,-1] = p[:,-2]     # dp/dy = 0 at y = 2
+        p[0,:] = p[1,:]       # dp/dy = 0 at y = 0
+        p[-1,:] = p[-2,:]     # dp/dy = 0 at y = 2
     
     return p
 
 
 # Defining the solver function:
-def channelSolver(nt, u, v, dt, dx, dy, p, rho, nu):
+def channelSolver(nt, u, v, dt, dx, dy, p, rho, nu, F):
     un = np.empty_like(u)
     vn = np.empty_like(v)
     
@@ -99,7 +99,7 @@ def channelSolver(nt, u, v, dt, dx, dy, p, rho, nu):
         vn[1:-1,1:-1]*(dt/dy)*(un[1:-1,1:-1]-un[1:-1,0:-2]) - \
         (dt/(2*rho*dx))*(p[2:,1:-1]-p[0:-2,1:-1]) + \
         nu*(dt/dx**2*(un[2:,1:-1]-2*un[1:-1,1:-1]+un[0:-2,1:-1]) + \
-        dt/dy**2*(un[1:-1,2:]-2*un[1:-1,1:-1]+un[1:-1,0:-2]))
+        dt/dy**2*(un[1:-1,2:]-2*un[1:-1,1:-1]+un[1:-1,0:-2])) + F*dt
         
         # Introducing the periodic boundary condition for x = 0
         # [2:,] -> [1,]; [1:-1,] -> [0,]; [0:-2,] -> [-1,]
@@ -108,7 +108,7 @@ def channelSolver(nt, u, v, dt, dx, dy, p, rho, nu):
         vn[0,1:-1]*(dt/dy)*(un[0,1:-1]-un[0,0:-2]) - \
         (dt/(2*rho*dx))*(p[1,1:-1]-p[-1,1:-1]) + \
         nu*(dt/dx**2*(un[1,1:-1]-2*un[0,1:-1]+un[-1,1:-1]) + \
-        dt/dy**2*(un[0,2:]-2*un[0,1:-1]+un[0,0:-2]))        
+        dt/dy**2*(un[0,2:]-2*un[0,1:-1]+un[0,0:-2])) + F*dt        
         
         # Introducing the periodic boundary condition for x = 2
         # [2:,] -> [0,]; [1:-1,] -> [-1,]; [0:-2,] -> [-2,]
@@ -117,7 +117,7 @@ def channelSolver(nt, u, v, dt, dx, dy, p, rho, nu):
         vn[-1,1:-1]*(dt/dy)*(un[-1,1:-1]-un[-1,0:-2]) - \
         (dt/(2*rho*dx))*(p[0,1:-1]-p[-2,1:-1]) + \
         nu*(dt/dx**2*(un[0,1:-1]-2*un[-1,1:-1]+un[-2,1:-1]) + \
-        dt/dy**2*(un[-1,2:]-2*un[-1,1:-1]+un[-1,0:-2]))        
+        dt/dy**2*(un[-1,2:]-2*un[-1,1:-1]+un[-1,0:-2])) + F*dt        
         
         
         # Calculating V component 
@@ -166,12 +166,13 @@ def channelSolver(nt, u, v, dt, dx, dy, p, rho, nu):
 def VectorPlot2D(u, v, Y, X):
     pl.figure(figsize = (11,7), dpi = 100)
     pl.quiver(X[::3,::3],Y[::3,::3],u[::3,::3],v[::3,::3]) # plotting velocity vectors
+    #pl.quiver(X,Y,u,v)
 
 # Defining the call function for the problem
 def channelFlow(xmin, xmax, ymin, ymax, nt, c):
     # Number of nodes
-    nx = 41
-    ny = 41
+    nx = 51
+    ny = 51
     
     # Cell size
     dx = (xmax-xmin)/(nx-1)
@@ -195,16 +196,17 @@ def channelFlow(xmin, xmax, ymin, ymax, nt, c):
     v = np.zeros((nx, ny))
     p = np.zeros((nx, ny))
     
-    u, v, p, steps = channelSolver(nt, u, v, dt, dx, dy, p, rho, nu)
+    u, v, p, steps = channelSolver(nt, u, v, dt, dx, dy, p, rho, nu, F)
     VectorPlot2D(u, v, Y, X)
+    #print steps
 
 # Variable declaration
 xmin = 0.0
 xmax = 2.0
 ymin = 0.0
 ymax = 2.0
-nt = 10
-c = 1
+nt = 5
+c = 2
 
 # Run the function
 channelFlow(xmin, xmax, ymin, ymax, nt, c)
