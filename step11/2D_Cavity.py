@@ -17,7 +17,7 @@ xmin = 0.0
 xmax = 2.0
 ymin = 0.0
 ymax = 2.0
-nt = 10000
+nt = 100
 c = 1
 
 
