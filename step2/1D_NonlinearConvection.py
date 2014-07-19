@@ -23,6 +23,7 @@ u[0.5/dx:1/dx+1] = 2.0 # input of initial conditions, same as step1
 un = np.ones(nx) # used only to initialize a matrix with the same dimension as u
 # in here will be kept the velocity for current time step
 
+pl.figure(figsize = (11,7), dpi = 100)
 for n in range(nt): # loop for time iteration
     un = u.copy() # copy the current time step velocity
     for i in range(1,nx): # loop over the entire space domain
@@ -30,13 +31,18 @@ for n in range(nt): # loop for time iteration
         # this step for the entire grid based on the velocities in previuos
         # time step and grid points
     pl.plot(grid,u) # plots all profiles on the same graph
+    pl.ylim([1.,2.2])
+    pl.xlabel('X')
+    pl.ylabel('Velocity')    
+    pl.title('1D Nonlinear Convection')
+
     
 # Discussion:
 # the wave has moved to the right, with a change in shape
 # in the same time, the hight is decreased
 # increasing the total time will make the scheme unstable if
 # there are not enough timesteps
-# that is if the time step is incrreased the problem loose resolution
+# that is if the time step is increased the problem loose resolution
 
 # as a good recomendation, the time step dt must be corelated with
 # the element size, dx
