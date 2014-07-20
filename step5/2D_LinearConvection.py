@@ -17,9 +17,9 @@ import pylab as pl
 pl.ion()
 
 # Variable declaration
-nx = 501 # initial value 81
-ny = 501 # initial value 81
-nt = 700 # number of time steps; initial value 100
+nx = 81 # initial value 81
+ny = 81 # initial value 81
+nt = 100 # number of time steps; initial value 100
 c = 1
 
 dx = 2.0 / (nx-1)
@@ -41,6 +41,9 @@ fig = pl.figure(figsize = (11,7), dpi = 100)
 ax = Axes3D(fig)
 X, Y = np.meshgrid(x,y)
 surf1 = ax.plot_surface(X,Y,u[:])
+pl.xlabel('X')
+pl.ylabel('Y')
+pl.title('2D Linear Convection: Initial condition')
 
 # Iterating in two dimensions
 # First using nested for loops - use this method delete the quotes
@@ -67,3 +70,6 @@ for n in range(nt+1):
 fig = pl.figure(figsize=(11,7), dpi=100)
 ax = Axes3D(fig)
 surf2 = ax.plot_surface(X, Y, u[:])
+pl.xlabel('X')
+pl.ylabel('Y')
+pl.title('2D Linear Convection: Solution')

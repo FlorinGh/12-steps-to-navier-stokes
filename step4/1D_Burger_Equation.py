@@ -47,6 +47,9 @@ pl.figure(figsize=(11,7), dpi=100)
 pl.plot(grid,u, marker='o', lw=2)
 pl.xlim([0,2*np.pi])
 pl.ylim([0,10])
+pl.xlabel('X')
+pl.ylabel('Velocity') 
+pl.title('1D Burgers Equation - Initial condition')
 
 # Apply the scheme with the periodic boundary conditions in mind
 for n in range(nt): # loop in time
@@ -68,3 +71,6 @@ pl.plot(grid, u_analytical, label='Analytical')
 pl.xlim([0, 2*np.pi])
 pl.ylim([0,10])
 pl.legend()
+pl.xlabel('X')
+pl.ylabel('Velocity') 
+pl.title('1D Burgers Equation - Solutions')
