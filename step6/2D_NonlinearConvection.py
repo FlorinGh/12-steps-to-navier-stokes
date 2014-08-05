@@ -12,10 +12,9 @@ import pylab as pl
 pl.ion()
 
 # Variable declaration
-nx = 501
-ny = 501
-nt = 400
-c = 1
+nx = 501 # initial value 101
+ny = 501 # initial value 101
+nt = 400 # initial value 80
 
 dx = 2.0/(nx-1)
 dy = 2.0/(ny-1)
@@ -59,12 +58,8 @@ fig = pl.figure(figsize=(11,7), dpi=100)
 ax = Axes3D(fig)
 X,Y = np.meshgrid(x,y)
 ax.plot_surface(X,Y,v,cmap=cm.coolwarm) # plot the u component of the velocity
+pl.xlabel('X')
+pl.ylabel('Y')
+pl.title('2D Nonlinear Convection: Solution')
 # to plot the v component just change u with v
 # because the equations are symetrical, the plots are identical
-
-
-
-
-
-
-

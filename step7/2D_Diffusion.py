@@ -3,8 +3,8 @@
 
 # in this equation we have the acumulation and diffusion terms
 # the problem is 2D and we want to solve for the velocities
-# the expected phenomena is that the in the domain will tend to spread
-# from the high values to the low values; thsi can be best seen in the plots
+# the expected phenomena is that the velocities will tend to spread
+# from the high values to the low values; this can be best seen in the plots
 
 import numpy as np
 from mpl_toolkits.mplot3d import Axes3D
