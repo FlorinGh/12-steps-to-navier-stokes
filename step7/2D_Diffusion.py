@@ -39,8 +39,11 @@ u[0.5/dy:1/dy+1, 0.5/dx:1/dx+1] = 2 # This is the hat function
 fig =pl.figure(figsize = (11,7), dpi = 100)
 ax = Axes3D(fig)
 X, Y = np.meshgrid(x,y)
-surf1 = ax.plot_surface(X,Y,u[:], rstride=1, cstride=1, cmap=cm.coolwarm,
+ax.plot_surface(X,Y,u[:], rstride=1, cstride=1, cmap=cm.coolwarm,
         linewidth=0, antialiased=True)
+pl.xlabel('X')
+pl.ylabel('Y')
+pl.title('2D Diffusion only: Initial condition')
 
 # Applying the scheme in a function of time
 def diffuse(nt):
@@ -59,9 +62,15 @@ def diffuse(nt):
     
     fig = pl.figure(figsize = (11,7), dpi = 100)
     ax = Axes3D(fig)
-    surf2 = ax.plot_surface(X,Y,u[:], rstride=1, cstride=1, cmap=cm.coolwarm, \
+    ax.plot_surface(X,Y,u[:], rstride=1, cstride=1, cmap=cm.coolwarm, \
     linewidth=0, antialiased=True)
+    pl.xlabel('X')
+    pl.ylabel('Y')
+    pl.title('2D Diffusion only: Solution after '+ str(nt) + ' steps')
     ax.set_zlim(1,2.5)
     pl.show()
     
 diffuse(10)
+diffuse(30)
+diffuse(90)
+diffuse(270)
