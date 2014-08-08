@@ -1,20 +1,19 @@
 # Step 8: Burgers' equations
 # it's an equation that has both the convective and diffusive terms
-# the ecuations to be solved are: du/dt + u*du/dx + v*du/dy = nu*d2u/dx2 +nu*d2u/dy2
+# the ecuations to be solved are:
+# du/dt + u*du/dx + v*du/dy = nu*d2u/dx2 +nu*d2u/dy2
 # this a very complex equation but has analitycal solutions
 # these equations can have discontinuous solutions, that is shocks
 
 import numpy as np
 from mpl_toolkits.mplot3d import Axes3D
 import pylab as pl
-from pylab import cm
 pl.ion()
 
 # Variable declaration
 nx = 51
 ny = 51
 nt = 1200
-c = 1
 
 dx = 2.0/(nx-1)
 dy = 2.0/(ny-1)
@@ -39,9 +38,11 @@ v[0.5/dy:1/dy+1, 0.5/dx:1/dx+1] = 2
 fig  = pl.figure(figsize = (11,7), dpi = 100)
 ax = Axes3D(fig)
 X, Y = np.meshgrid(x,y)
-wire1 = ax.plot_wireframe(X, Y, u[:], cmap = cm.coolwarm)
-#wire2 = ax.plot_wireframe(X, Y, v[:], cmap = cm.coolwarm)
-# the plots are identical
+ax.plot_wireframe(X, Y, u[:])
+pl.xlabel('X')
+pl.ylabel('Y')
+pl.title('Burgers Equation: Initial condition')
+ax.set_zlim(1,2.0)
 
 # The scheme
 for n in range(nt+1):
@@ -74,5 +75,8 @@ for n in range(nt+1):
 fig = pl.figure(figsize = (11,7), dpi = 100)
 ax = Axes3D(fig)
 X, Y = np.meshgrid(x,y)
-wire1 = ax.plot_wireframe(X,Y,u[:])
-#wire2 = ax.plot_wireframe(X,Y,v[:])
+ax.plot_wireframe(X,Y,u[:])
+pl.xlabel('X')
+pl.ylabel('Y')
+pl.title('Burgers Equation: Solution after 1200 steps')
+ax.set_zlim(1,2.0)
