@@ -2,7 +2,7 @@
 # this is the homogenous Poisson equation
 # the equation to be solved: d2p/dx2 + d2p/dy2 = 0
 # as it can be seen it is steady state equations and it appears in may applications
-# this code will sole the equation using loops in the style of other steps
+# this code will solve the equation using functions
 
 import numpy as np
 from mpl_toolkits.mplot3d import Axes3D

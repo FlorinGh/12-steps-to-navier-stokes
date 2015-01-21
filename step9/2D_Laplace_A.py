@@ -2,7 +2,7 @@
 # this is the homogenous Poisson equation
 # the equation to be solved: d2p/dx2 + d2p/dy2 = 0
 # as it can be seen it is steady state equations and it appears in may applications
-# this code will sole the equation using loops in the style of other steps
+# this code will solve the equation using loops in the style of other steps
 
 import numpy as np
 from mpl_toolkits.mplot3d import Axes3D
@@ -25,7 +25,7 @@ y = np.linspace(0,1,ny)
 p = np.zeros((ny,nx))
 pn = np.zeros((ny,nx))
 
-# Assign initial conditions
+# Assign boundary conditions
 p[:,0] = 0
 p[:,-1] = y
 p[0,:] = p[1,:]
@@ -43,20 +43,24 @@ ax.view_init(30,225)
 l1norm_target = 0.01
 for n in range(nt+1):
     pn = p.copy()
+    # the scheme
     p[1:-1,1:-1] = (dx**2*(pn[1:-1,0:-2] + pn[1:-1,2:]) + \
     dy**2*(pn[0:-2,1:-1] + pn[2:,1:-1]))/(2*dx**2+2*dy**2)
     
+    # the scheme at the boundary
     p[0,0] = (dx**2*(pn[0,-1] + pn[0,1]) + \
         dy**2*(pn[-1,0] + pn[1,0]))/(2*dx**2+2*dy**2)
         
     p[-1,-1] = (dx**2*(pn[-1,-2] + pn[-1,0]) + \
         dy**2*(pn[-2,-1] + pn[0,-1]))/(2*dx**2+2*dy**2)
     
+    # re-applying boundary conditions
     p[:,0] = 0
     p[:,-1] = y
     p[0,:] = p[1,:]
     p[-1,:] = p[-2,:]
     
+    # checking for convergence
     l1norm = (np.sum(np.abs(p[:])-np.abs(pn[:])))/np.sum(np.abs(pn[:]))
     if l1norm < l1norm_target:
         break
