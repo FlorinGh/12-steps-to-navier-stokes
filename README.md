@@ -100,21 +100,21 @@ pl.title('2D Nonlinear Convection: Solution')
 
 * Burgers' equation
 
-![](https://github.com/FlorinGh/12-steps-to-navier-stokes/tree/master/stp8-burgers-equation-2D/burgers_ic.png)
+![](https://github.com/FlorinGh/12-steps-to-navier-stokes/blob/master/stp8-burgers-equation-2D/burgers_IC.png)
 
-![](https://github.com/FlorinGh/12-steps-to-navier-stokes/tree/master/stp8-burgers-equation-2D/burgers_sol_120.png)
+![](https://github.com/FlorinGh/12-steps-to-navier-stokes/blob/master/stp8-burgers-equation-2D/burgers_sol_120.png)
 
-![](.https://github.com/FlorinGh/12-steps-to-navier-stokes/tree/master/stp8-burgers-equation-2D/burgers_sol_1200.png)
+![](.https://github.com/FlorinGh/12-steps-to-navier-stokes/blob/master/stp8-burgers-equation-2D/burgers_sol_1200.png)
 
 * cavity flow
 
-![](https://github.com/FlorinGh/12-steps-to-navier-stokes/tree/master/stp11-cavity-problem/cav_sol_10.png)
+![](https://github.com/FlorinGh/12-steps-to-navier-stokes/blob/master/stp11-cavity-problem/cav_sol_10.png)
 
-![](https://github.com/FlorinGh/12-steps-to-navier-stokes/tree/master/stp11-cavity-problem/solution_5000.png)
+![](https://github.com/FlorinGh/12-steps-to-navier-stokes/blob/master/stp11-cavity-problem/solution_5000.png)
 
 * channel flow
 
-![](https://github.com/FlorinGh/12-steps-to-navier-stokes/tree/master/stp12-channel-flow-problem/solution.png)
+![](https://github.com/FlorinGh/12-steps-to-navier-stokes/blob/master/stp12-channel-flow-problem/solution.png)
 
 ## **Results**
 
