@@ -86,17 +86,17 @@ pl.title('2D Nonlinear Convection: Solution')
 # because the equations are symetrical, the plots are identical
 ```
 
-![](https://github.com/FlorinGh/12-steps-to-navier-stokes/tree/master/stp6-nonlinear-convection-2D/nonlinear_2d_solution_1.png)
+![](https://github.com/FlorinGh/12-steps-to-navier-stokes/blob/master/stp6-nonlinear-convection-2D/nonlin_conv_2D_solution_2.png)
 
 * diffusion:
 
-![](https://github.com/FlorinGh/12-steps-to-navier-stokes/tree/master/stp7-diffusion-2D/diffusion_initial_conditions.png)
+![](https://github.com/FlorinGh/12-steps-to-navier-stokes/blob/master/stp7-diffusion-2D/diffusion_initial_conditions.png)
 
-![](https://github.com/FlorinGh/12-steps-to-navier-stokes/tree/master/stp7-diffusion-2D/sol_diffusion_10.png)
+![](https://github.com/FlorinGh/12-steps-to-navier-stokes/blob/master/stp7-diffusion-2D/sol_diffusion_10.png)
 
-![](https://github.com/FlorinGh/12-steps-to-navier-stokes/tree/master/stp7-diffusion-2D/sol_diffusion_30.png)
+![](https://github.com/FlorinGh/12-steps-to-navier-stokes/blob/master/stp7-diffusion-2D/sol_diffusion_30.png)
 
-![](https://github.com/FlorinGh/12-steps-to-navier-stokes/tree/master/stp7-diffusion-2D/sol_diffusion_270.png)
+![](https://github.com/FlorinGh/12-steps-to-navier-stokes/blob/master/stp7-diffusion-2D/sol_diffusion_270.png)
 
 * Burgers' equation
 
