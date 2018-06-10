@@ -4,7 +4,7 @@
 
 Use computing capabilities of Python to solve the nonlinear coupled partial derivative equations that govern the dynamics of fluids, the Navier-Stokes equations:
 
-![](https://github.com/FlorinGh/12-steps-to-navier-stokes/navier-stokes-equations.jpg)
+![](https://github.com/FlorinGh/12-steps-to-navier-stokes/blob/master/navier-stokes-equations.jpg)
 
 ## **Actions**
 
