@@ -14,7 +14,7 @@ Use computing capabilities of Python to solve the nonlinear coupled partial deri
 ![](https://github.com/FlorinGh/12-steps-to-navier-stokes/blob/master/stp5-linear-convection-2D/2D_linear_conv_initial_conditions.png)
 
 
-![](https://github.com/FlorinGh/12-steps-to-navier-stokes/tree/master/stp5-linear-convection-2D/2d_linear_conv_solution.png)
+![](https://github.com/FlorinGh/12-steps-to-navier-stokes/blob/master/stp5-linear-convection-2D/2d_linear_conv_solution.png)
 
 * nonlinear convection:
 
